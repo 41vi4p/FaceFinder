@@ -1,0 +1,109 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+body{
+    overflow: hidden;
+    background-color: #5D737E;
+}
+.section{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+.main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    filter: blur(150px);
+    transition: all 5s ease-in-out 0.2s;
+}
+.main:hover{
+    transition: all 5s ease-in-out 0.2s;
+}
+
+.color:nth-child(1){
+    top: -350px;
+    width: 1000px;
+    height: 600px;
+    background-image: url("hero1.webp");
+}   
+
+.container{
+    height: 400px;
+    width: 400px;
+    position: absolute;
+    display: block;
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(5px);
+    box-shadow: 0 25px 45px rgba(0,0,0,0.1);
+    border:1px solid rgba(255,255,255,0.1);
+    border-radius: 10px;
+}
+.tag{
+    display: flex;
+    justify-content: center;
+    height: 100px;
+    color: white;
+    font-weight: 900;
+}
+.input{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+}
+.input input{
+    width: 75%;
+    height: 30px;
+    background-color:rgba(255,255,255,0.7);
+    border:2px solid rgba(255,255,255,0.2) ;
+    margin-top: -35px;
+    border-radius: 10px;
+
+}
+.input1{
+    margin-left: -21px;
+}
+.input2{
+    margin-left: -21px;
+}
+.tag2{
+    margin-left: 20px;
+    font-weight: 650;
+    color: #d6F8D6;
+    font-size: 1.5rem;
+    margin-top: -20px;
+}
+.tag3{
+    margin-top: 5px;
+    margin-left: 8px;
+}
+.tag3 a{
+    color: #D6F8D6;
+}
+.button{
+    margin-top: -30px;
+    margin-bottom: 15px;
+    margin-left: 30px;
+}
+.button button{
+    height: 30px;
+    width:70px ;
+    border-radius: 15px;
+    border-color: transparent;
+    background-color: #D6F8D6;
+    
+}
+.button button:active{
+    background-color: #1a95b1c5;
+}
+.input i{
+    margin-left: 5px;
+    margin-top: -30px;
+}
+.box{
+    position: relative;
+}
