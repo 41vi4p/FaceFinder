@@ -1,0 +1,7 @@
+pip install python-multipart
+pip install fastapi
+pip install uvicorn
+pip install opencv-python
+pip install opencv-contrib-python
+pip install face_recognition
+

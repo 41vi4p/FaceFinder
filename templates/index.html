@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FaceFinder</title>
+  <!-- Bootstrap CDN -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- jQuery CDN -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <!-- Bootstrap JS CDN -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <link href="{{ url_for('static', path='/css/style.css') }}" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <section>
+        <div class="content">
+          <div class="info" id="first-logo">
+            <div class="heading">
+            <h1><span class="movie-night">FaceFinder</span></h1>
+            </div>
+            <button id="first-button" class="btn" data-toggle="collapse" data-target="#second-buttons">START</button>
+          </div>
+          <div id="second-buttons" class="collapse">
+            <form action="/uploadfile/" method="post" enctype="multipart/form-data">
+            <div class="contentbox">
+            <div id="box2" class="drop-area js-drop-area dpa">
+              <div class="drop-content js-drop-content active">
+                <p class="drop-text">
+                  Drag and Drop to Upload a Photo
+                  <br/>
+                  OR
+                </p>
+                <label for="file" class="drop-button">Browse File</label>
+                <input type="file" class="input-file js-input-file" id="file" name="img" accept="image/*" />
+              </div>
+              
+              <div class="drop-content js-drop-content done">
+                <img src="{{ url_for('static', path='/green.png') }}" alt="Uploaded" style="width:300px;height:300px;">
+              </div>
+            </div>
+              
+
+            
+            </div>
+            <div id="box2b" class="drop-area js-drop-area-2">
+              <div class="drop-content js-drop-content-2 active">
+                <p class="drop-text">
+                  Drag and Drop to Upload the Folder to Search In
+                  <br/>
+                  OR
+                </p>
+                <label for="file-2" class="drop-button">Browse Folder</label>
+                <input type="file" class="input-file js-input-file-2" id="file-2" name="files" webkitdirectory directory multiple />
+              </div>
+              
+              <div class="drop-content js-drop-content-2 done-2">
+                <img src="{{ url_for('static', path='/green.png') }}" alt="Uploaded" style="width:300px;height:300px;">
+                <button type="submit" value="Upload" class="btn">START PROCESSING</button>
+              </div>
+            </div>
+          </form>
+          </div>
+
+          
+      </div>
+          <div id="fourth-buttons" class="collapse">
+            <button class="btn btn-info btn-lg m-2">Button A</button>
+            <button class="btn btn-secondary btn-lg m-2">Button B</button>
+            <button class="btn btn-dark btn-lg m-2">Button C</button>
+            <div class="swiper">
+              <div class="swiper-wrapper">
+                
+                <div class="swiper-slide">
+                  <span>8.5</span>
+                  <h2>Test</h2>
+                </div>  
+            </div>
+          </div>
+        </div>
+        
+          
+        <ul class="circles">
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ul>
+        
+      </section>
+  
+  
+  <script>
+    // Hide the second and third buttons initially
+    $("#second-buttons").hide();
+    $("#third-buttons").hide();
+    //$("#done").hide();
+    //$("#box2b").hide();
+
+    // Add animation to the first button
+    $("#first-button").click(function() {
+      $(this).addClass("animated fadeOut");
+      // Show the second buttons with slide-in animation
+      $("#first-button").hide().addClass("animated slideInLeft");
+      $("#first-logo").hide().addClass("animated slideInLeft");
+      $("#second-buttons").show().addClass("animated slideInLeft");
+    });
+
+
+    $("#nextb").click(function() {
+      $(this).addClass("animated fadeOut");
+      // Show the second buttons with slide-in animation
+      $("#box2").hide().addClass("animated slideInLeft");
+      $("#box2b").show().addClass("animated zoomIn");
+    });
+
+    
+
+    $("#first-button").click(function() {
+      $(this).addClass("animated fadeOut");
+      // Show the second buttons with slide-in animation
+      $("#first-button").hide().addClass("animated slideInLeft");
+      $("#first-logo").hide().addClass("animated slideInLeft");
+      $("#second-buttons").show().addClass("animated slideInLeft");
+    });
+
+    // Add animation to the second buttons
+    $("#second-buttons button").click(function() {
+      // Hide the second buttons with slide-out animation
+      $("#second-buttons").addClass("animated slideOutRight");
+      // Show the third buttons with zoom-in animation
+      $("#third-buttons").show().addClass("animated zoomIn");
+    });
+  </script>
+</body>
+<script src="{{ url_for('static', path='/j.js') }}"></script>
+</html>

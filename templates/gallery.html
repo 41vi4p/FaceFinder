@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Photo gallery UI</title>
+  <link href="{{ url_for('static', path='/css/style2.css') }}" rel="stylesheet"  type="text/css">
+</head>
+
+<body>
+  <section>
+    <div class="container">
+      <div class="header">
+        <h1 class="logo">FaceFinder</h1>
+      </div>
+      <div class="gallery">
+        {% for image in image_files %}
+            <div class="item">
+                <img src="{{ url_for('images', path=image) }}" alt="{{ image }}">
+                <label><input type="checkbox" name="images" value="{{ image }}"> {{ image }}</label>
+                <h3>Photographer Name</h3>
+            </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+</body>
+
+</html>
