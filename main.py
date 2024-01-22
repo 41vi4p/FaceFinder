@@ -1,4 +1,4 @@
-from fastapi import FastAPI, File, UploadFile, Request, WebSocket
+from fastapi import FastAPI, File, UploadFile, Request, WebSocket, Response
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
@@ -13,6 +13,8 @@ import time
 import sys
 from pathlib import Path
 import webbrowser
+import zipfile
+import shutil
 
 app = FastAPI()
 templates = Jinja2Templates(directory="templates")
@@ -22,7 +24,7 @@ os.makedirs ("images", exist_ok=True)
 os.makedirs ("images_tmp", exist_ok=True)
 # Mount the folder as a static file directory
 app.mount ("/images", StaticFiles (directory="images"), name="images")
-app.mount ("/images_tmp", StaticFiles (directory="images_tmp"), name="imagestmp")
+app.mount ("/images_tmp", StaticFiles (directory="images_tmp"), name="images_tmp")
 
 app.mount("/static", StaticFiles(directory="static"), name="static")
 # Define a route to display the web UI
@@ -68,6 +70,11 @@ async def create_upload_file(img: UploadFile = File (...), files: list[UploadFil
 
     start_time = time.time()
 
+    os.makedirs ("images_tmp/"+substring[1]+"FaceDetected", exist_ok=True)
+    foldername = os.path.join(os.getcwd(), "images_tmp/"+substring[1]+"FaceDetected")
+    #os.startfile(folder_path2)
+    os.system('xdg-open "%s"' % foldername)
+
     for root, dirs, files in os.walk(pictures_folder):
         for file in files:
             if file.endswith(".jpeg") or file.endswith(".jpg") or file.endswith(".png"):
@@ -91,8 +98,12 @@ async def create_upload_file(img: UploadFile = File (...), files: list[UploadFil
                     cv2.imshow(" ",img)
                     #cv2.waitKey(0)
                     cv2.destroyAllWindows()
+                    
+                    Face_folder = os.path.join ("images_tmp/"+substring[1]+"FaceDetected")
                     print(f"File name: {file}, Location: {img_path}")
-        return templates.TemplateResponse("gallery.html", {"message": None})
+                    shutil.copy(img_path, Face_folder)
+        return 
+        #return templates.TemplateResponse("gallery.html", {"request":None , "image_files": pictures_folder})
 
 
 # Define a route for the download page that will allow the user to select and download images as a zip file
@@ -107,7 +118,7 @@ async def download(request: Request):
     with zipfile.ZipFile(zip_buffer, "w") as zip_file:
         # Loop through the selected images and add them to the zip file
         for image in selected_images:
-            zip_file.write(f"images/{image}", image)
+            zip_file.write(f"images_tmp/{image}", image)
     # Return the zip file as a response with the appropriate headers
     return Response(
         zip_buffer.getvalue(),
