@@ -11,7 +11,7 @@ To run this Software:
 6. For Windows users, in case the above command fails follow these steps to install dlib: https://www.geeksforgeeks.org/how-to-install-dlib-library-for-python-in-windows-10/
 7. After Installing all the required packages, run the python file using command 'python <file-name>.py'
    For Windows Users: Use command 'python main_windows.py'
-   For Linux Users: Use command 'python main.py'
+   For Linux Users: Use command 'python main_linux.py'
 8. Once the python program starts executing it will open WebUI automatically.
 
 [✅] Tested On Windows
