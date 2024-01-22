@@ -1,7 +1,8 @@
-pip install python-multipart
-pip install fastapi
-pip install uvicorn
-pip install opencv-python
-pip install opencv-contrib-python
-pip install face_recognition
-
+python-multipart
+fastapi
+uvicorn
+opencv-python
+opencv-contrib-python
+face_recognition
+async
+asyncio
