@@ -102,7 +102,7 @@ async def create_upload_file(img: UploadFile = File (...), files: list[UploadFil
                     Face_folder = os.path.join ("images_tmp/"+substring[1]+"FaceDetected")
                     print(f"File name: {file}, Location: {img_path}")
                     shutil.copy(img_path, Face_folder)
-        return
+        
         #return templates.TemplateResponse("gallery.html", {"request":None , "image_files": pictures_folder})
 
 
@@ -131,5 +131,5 @@ async def download(request: Request):
 # Add a conditional statement to run Uvicorn if the file is the main script
 if __name__ == "__main__":
     webbrowser.open("http://localhost:8000/")
-    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
+    uvicorn.run("main_linux:app", host="0.0.0.0", port=8000, reload=True)
     
