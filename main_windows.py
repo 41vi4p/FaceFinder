@@ -102,7 +102,7 @@ async def create_upload_file(img: UploadFile = File (...), files: list[UploadFil
                     Face_folder = os.path.join ("images_tmp\\"+substring[1]+"FaceDetected")
                     print(f"File name: {file}, Location: {img_path}")
                     shutil.copy(img_path, Face_folder)
-        return 
+        
         #return templates.TemplateResponse("gallery.html", {"request":None , "image_files": pictures_folder})
 
 
