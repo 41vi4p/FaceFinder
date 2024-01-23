@@ -6,3 +6,4 @@ opencv-contrib-python
 face_recognition
 async
 asyncio
+Jinja2
