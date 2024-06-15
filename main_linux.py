@@ -15,6 +15,7 @@ from pathlib import Path
 import webbrowser
 import zipfile
 import shutil
+from datetime import timedelta
 
 app = FastAPI()
 templates = Jinja2Templates(directory="templates")
@@ -25,6 +26,32 @@ os.makedirs ("images_tmp", exist_ok=True)
 # Mount the folder as a static file directory
 app.mount ("/images", StaticFiles (directory="images"), name="images")
 app.mount ("/images_tmp", StaticFiles (directory="images_tmp"), name="images_tmp")
+
+def deletetmp():
+    folder = 'images'
+    for filename in os.listdir(folder):
+        file_path = os.path.join(folder, filename)
+        try:
+            if os.path.isfile(file_path) or os.path.islink(file_path):
+                os.unlink(file_path)
+            elif os.path.isdir(file_path):
+                shutil.rmtree(file_path)
+        except Exception as e:
+            print('Failed to delete %s. Reason: %s' % (file_path, e))
+
+
+def deletetmp2(folder):
+    for filename in os.listdir(folder):
+        file_path = os.path.join(folder, filename)
+        try:
+            if os.path.isfile(file_path) or os.path.islink(file_path):
+                os.unlink(file_path)
+            elif os.path.isdir(file_path):
+                shutil.rmtree(file_path)
+        except Exception as e:
+            print('Failed to delete %s. Reason: %s' % (file_path, e))
+
+
 
 app.mount("/static", StaticFiles(directory="static"), name="static")
 # Define a route to display the web UI
@@ -70,8 +97,8 @@ async def create_upload_file(img: UploadFile = File (...), files: list[UploadFil
 
     start_time = time.time()
 
-    os.makedirs ("images_tmp/"+substring[1]+"FaceDetected", exist_ok=True)
-    foldername = os.path.join(os.getcwd(), "images_tmp/"+substring[1]+"FaceDetected")
+    os.makedirs ("images_tmp/"+substring[1]+"_FaceDetected", exist_ok=True)
+    foldername = os.path.join(os.getcwd(), "images_tmp/"+substring[1]+"_FaceDetected")
     #os.startfile(folder_path2)
     os.system('xdg-open "%s"' % foldername)
 
@@ -93,40 +120,23 @@ async def create_upload_file(img: UploadFile = File (...), files: list[UploadFil
                 processed_files += 1
                 elapsed_time = time.time() - start_time
                 estimated_time = (elapsed_time / processed_files) * (total_files - processed_files)
-                print(f"Processed {processed_files} out of {total_files} files. Estimated time left: {estimated_time:.2f} seconds.")
+                estimated_time_delta = timedelta(seconds=int(estimated_time))
+                print(f"Processed {processed_files} out of {total_files} files. Estimated time left: {estimated_time_delta} seconds.")
                 if result[0]:
                     cv2.imshow(" ",img)
                     #cv2.waitKey(0)
                     cv2.destroyAllWindows()
                     
-                    Face_folder = os.path.join ("images_tmp/"+substring[1]+"FaceDetected")
+                    Face_folder = os.path.join ("images_tmp/"+substring[1]+"_FaceDetected")
                     print(f"File name: {file}, Location: {img_path}")
                     shutil.copy(img_path, Face_folder)
-        
+                if input() == 'q':
+                    break
+    deletetmp()  
+    deletetmp2(pictures_folder) 
         #return templates.TemplateResponse("gallery.html", {"request":None , "image_files": pictures_folder})
 
 
-# Define a route for the download page that will allow the user to select and download images as a zip file
-@app.post("/download", response_class=HTMLResponse)
-async def download(request: Request):
-    # Get the form data from the request
-    form_data = await request.form()
-    # Get the list of selected image filenames from the form data
-    selected_images = form_data.getlist("images")
-    # Create a zip file in memory
-    zip_buffer = io.BytesIO()
-    with zipfile.ZipFile(zip_buffer, "w") as zip_file:
-        # Loop through the selected images and add them to the zip file
-        for image in selected_images:
-            zip_file.write(f"images_tmp/{image}", image)
-    # Return the zip file as a response with the appropriate headers
-    return Response(
-        zip_buffer.getvalue(),
-        media_type="application/zip",
-        headers={
-            "Content-Disposition": "attachment; filename=images.zip"
-        }
-    )
 
 # Add a conditional statement to run Uvicorn if the file is the main script
 if __name__ == "__main__":
