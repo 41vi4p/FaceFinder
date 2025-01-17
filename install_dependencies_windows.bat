@@ -1,5 +1,8 @@
 @echo off
 
+git clone https://github.com/41vi4p/FaceFinder.git
+cd FaceFinder
+
 echo Installing Miniconda3...
 @REM win_installer_files\Miniconda3-latest-Windows-x86_64.exe
 

@@ -19,13 +19,14 @@ if %ERRORLEVEL% EQU 0 (
     echo Checking conda environment 'facefinder'...
     conda env list | find "facefinder" >nul 2>nul
     if %ERRORLEVEL% EQU 0 (
-        @REM conda create -n facefinder python==3.9
+        conda create -n facefinder python==3.9
         echo Environment 'facefinder' exists
         timeout /t 4
         conda activate facefinder
         timeout /t 2
         pip install -r requirements.txt
-
+        echo Done Installing Requirements
+        timeout /t 4
     ) else (
         echo Environment 'facefinder' not found!
         timeout /t 4
