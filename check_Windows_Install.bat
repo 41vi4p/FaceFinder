@@ -24,8 +24,8 @@ if %ERRORLEVEL% EQU 0 (
         timeout /t 4
         conda activate facefinder
         timeout /t 2
-        pip install -r requirements.txt
-        echo Done Installing Requirements
+        pip install -r src\requirements.txt
+        echo Done Installing Requirements! Use run-windows.bat to run FaceFinder
         timeout /t 4
     ) else (
         echo Environment 'facefinder' not found!
