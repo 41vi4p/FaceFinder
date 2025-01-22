@@ -15,6 +15,9 @@ from pathlib import Path
 import webbrowser
 import zipfile
 import shutil
+import socket
+import qrcode
+from colorama import init, Fore, Back, Style
 
 app = FastAPI()
 templates = Jinja2Templates(directory="templates")
@@ -130,6 +133,40 @@ async def download(request: Request):
 
 # Add a conditional statement to run Uvicorn if the file is the main script
 if __name__ == "__main__":
-    webbrowser.open("http://localhost:8000/")
-    uvicorn.run("main_windows:app", host="0.0.0.0", port=8000, reload=True)
+    set_port = 8005
+    host_address = "0.0.0.0"
+    # Get local IP address
+    hostname = socket.gethostname()
+    local_ip = socket.gethostbyname(hostname)
     
+    try:
+        init()
+        # Generate QR code for network access
+        network_url = f"http://{local_ip}:{set_port}"
+        qr = qrcode.QRCode(version=1,error_correction=qrcode.constants.ERROR_CORRECT_L, 
+                           box_size=1, 
+                           border=2)
+        qr.add_data(network_url)
+        qr.make(fit=True)
+        # Print QR code in terminal
+       
+        # Print the QR code to the terminal
+        
+        print("\nScan this QR code to access FaceFinder:")
+        print(Style.BRIGHT)
+        qr_string = qr.get_matrix()
+        for row in qr_string:
+            print(''.join('██' if cell else '  ' for cell in row))
+        print(Style.RESET_ALL)
+            
+        print(f"\nStarting FaceFinder Server...")
+        print(f"Local Access URL: http://127.0.0.1:{set_port}")
+        print(f"Network Access URL: http://{local_ip}:{set_port}")
+        print("\nTo access from other devices in your network, use the Network Access URL")
+        print("Make sure your firewall allows incoming connections on port {set_port}")
+        
+        web_address = f"http://127.0.0.1:{set_port}/"
+        webbrowser.open(web_address)
+        uvicorn.run("main_windows:app", host=host_address, port=set_port, reload=True)
+    except Exception as e:
+        print(f"Error starting server: {e}")

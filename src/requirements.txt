@@ -8,3 +8,4 @@ face_recognition
 async
 asyncio
 Jinja2
+qrcode

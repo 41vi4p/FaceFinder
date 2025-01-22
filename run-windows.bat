@@ -24,7 +24,7 @@ if %ERRORLEVEL% NEQ 0 (
 )
 
 REM Run the main Python script
-python src\main_windows.py
+python main_windows.py
 if %ERRORLEVEL% NEQ 0 (
     color 0C
     echo Error: Python script failed to execute!

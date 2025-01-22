@@ -140,6 +140,8 @@ async def create_upload_file(img: UploadFile = File (...), files: list[UploadFil
 
 # Add a conditional statement to run Uvicorn if the file is the main script
 if __name__ == "__main__":
+    set_port = 8000
+    host_address = "0.0.0.0"
     webbrowser.open("http://localhost:8000/")
-    uvicorn.run("main_linux:app", host="0.0.0.0", port=8000, reload=True)
+    uvicorn.run("main_linux:app", host=host_address, port=set_port, reload=True)
     
