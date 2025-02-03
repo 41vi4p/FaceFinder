@@ -5,145 +5,104 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FaceFinder</title>
-  <!-- Bootstrap CDN -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <!-- jQuery CDN -->
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-  <!-- Bootstrap JS CDN -->
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  <link href="{{ url_for('static', path='/css/style.css') }}" rel="stylesheet" type="text/css">
+  <!-- Tailwind CSS CDN -->
+  <script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=dCZ8U5pDPOtGhPzjvGw7njNzZCApkmYQ18D0RxivjQ8k6YxGKzEBCGiNr6YhYR7MRb9pkzQxOCC0UI6SDM8Sx0Cw3819ZXqpjiOx_Ibsm8C-9CbXKB9_wyLttqB0Ne-HCieKvB-ouXrR9HEPDhwDaOsOXfluE0gqA2aO35AUWqavb4SUHPECj6-NbulDiqZRW39SwsCAmm8EO_P8Lh5sdPPNt7qDGpOo5mqboV0VxWJJJ1_ASrshNgeH1ntkLjuHU0Dn0D1rdh2Me0DoVg52e_J9RuVAadBs23EMS2FO9cD6KvOr5ljS-zS-PpA6LVbC1bdFWEudLPHW4w8LBCSGcvvom8nTnCfJJDwk-lo2P7vrjWwWjPDGc2y6dPPbwsfhfc00k67VOJSVMKrQRkfSLx7E60wsYxdOdvlznZxLcFE7IqMO2g2-Qk8ia5Us0Tge8Xmz8WrrNZ9Vy_djjgYPcCLG97Y62kKmIX7Lbms2gktUcKYZy7ctNMueipwzlwAAOk0AADj3-7MtFd17S79pTqGgjJfFBNvnsXmtsUJZXh0jQsoVYKacGCt1C7Vcb8SBXHQl8XE9fMx5L_DokQ1QOy9Q264MSHeDIOD86cf7W3qS2YkRZ8_avqNkadwOvrL-4VaPOdmTliu7gokn18U1P1vWPoO8dHf_w_bR7hYjyj2ZHwtAghot894dIEf1lioBkkC1-1GM3jhaBZaRr8OkLY22DE8CcDtmdvn440Vm-whk0n2RZBdIE3zT43LVScsYLwT1f4F_Qf2GCzDN1TLf4M4iCNkJERPaaanTTTlB4QopMoSzYsGQkrkXtPFsmF7rDDB8LAcIkGFg3Jk1ZjYfzhFRlPozbyviiXuQ1lWUwt2ZdY4CmlTxZ1u1H7vKIEy2xWrTe4PjeK-RbV_OBQppTQYB75Yl_BeNsRJc2YJupjwAJRNpJ4tD1Fh5eI1ycsyCmyraaEWzMN56NdE3dtSYG9oowmqFg7xBR0e51M9qoEviR9znEliz1o7267ehWx66y2Lfof8JpsQa6rUgo2ywlWwRk4P7d6bUO_VXNA2GXosUaJDFCpzno0PitHqi7pJtNd0_ZOXn2YMoCahK0dkMoKb3MTtdeHNgLzdsV36-xA4AT5o-wqBeqRbNmQpUHpRQB3rLdvoQoWt-AJz2a9RVDB963BrSwyyJuLLoK4uHQkvEYYhGxjW-j6RqCSvekxZ6sq707IzO5pGiEx3WADkuzn1iWJcL0x-yIlvsXWTXSf1E9Ko7YX730x-7lngteAoe-N2E-mxyorxQW5iXC-YeJyediMGGDnzCEeuSW2LpKH3INEu0-OBU941ZCjaJSzoRf-SUE09TnekCsgYcu23LWEg-Vb9GCqLUexIeWZmH33ofUp_dTn2kRb_iIA8CTGlx-fRAPHN4S-bvXpCXABt7X5-rTOMWOLSzYD3supf6oZJWLiEY0b86MtkIQ9jtNgTRSTuTve4TPzZPM2S_7DklX4YtWqYALBjUmA1Yu8tSxmgzfSjQEEe37PeLpdnEm5k6-HdHc-2L_Ku1c4PI366tDVUhofhXIaOlXEbqS669t83xgWHtkzCbQ3jvCSqMTiG_ea9RWdiO3_QWmqSw3istRR1EG_EMGrYj6DMf-8oAVdjoejw4smWDW79-UPqxdLAbrc_td6xr1N2bIuLQOyI6sA" nonce="6612bc27d82ce3e8debaeff578bc76c9" charset="UTF-8"></script><link rel="stylesheet" crossorigin="anonymous" href="https://gc.kis.v2.scr.kaspersky-labs.com/E3E8934C-235A-4B0E-825A-35A08381A191/abn/main.css?attr=aHR0cHM6Ly9tYWlsLWF0dGFjaG1lbnQuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2F0dGFjaG1lbnQvdS8wLz91aT0yJmlrPWNkYjkxYjNkZDMmYXR0aWQ9MC4xJnBlcm1tc2dpZD1tc2ctZjoxODIzMDI5NTkwNTI5ODQ1NDA5JnRoPTE5NGNiM2MwZjY4ZWE4YTEmdmlldz1hdHQmZGlzcD1zYWZlJnJlYWxhdHRpZD1mX202b3ZpaDZ4MSZ6dyZzYWRkYmF0PUFOR2pkSjkzY3VlbUh5REpmb1ExYk4wTnhKY2MtSVZHTmUydGNfbmQ2c2p0d3JzY2Z6RVNjZTZFZXRiTjl6bXhTeHVVSnhGZ2hQNGNvSDFYR2NiWC04QjZoR0U5X19OcVRJNVItWHdxd2w3UldBLU83NWRSenFpSnlrbDlRMDJnVFdSdFYzd2NiazlpaUp4R2pUUmo0RG1TS2s0eFFwajFiZGxRLXBROVlYYmlpZEh3em9laUFSMXhWNThudjlYOEFlemotZEJ2V2hOM3l4eTduMlBnN2toZlhtZ0dTS2x4cmZpcHN5eWdOWnl6dEJ6eHg4dW9kN0NlOE5aWUhWQXNzaHdBSmE4eC1SMlIzMlVsOW9hYlFjYmRqTzlqcXR1ZGt3MGphQ0lXcy1odW1WcDdWWWx1ZkhLMktmQ21qNEp1bFRTUkRuQXdRVnNnLTR6Vl9qcndKeU9oamNBUEpCY1dlQkpWQTgyWGlGWnNjNlRHNFd1ajFEN1pLSU5tYTJWc19LQjI4QV93ZDNFb0drNjVlZWpTczYxdzFWRFBuazN3M29jb05DZFBLVTVlQ2pGZnFnbnc0UGYtTTdBVHh3S090MUlabmp2ZG0tNGNOUmxqb2loR3k5Q1hUUV92cmVJOEVGREZQMWJOQWFlRi1YeFBKSzYtajB5aGt6TjNXd214OEFVZndsZk1id1NNS0RlUHJ3d2o5VUFqSmlhZEdFYzZDVnVITHh4eHRxN201NGFJa2t4blZfTkZaYjFMaldISk8tV0FMek56eHhVQzdIWmkyNmkzV255aGlJRVo2NDh2N2tRUmVnQXN3cl9sbzBXaVFBMjV5RVBSSTRyMWJlamFjRmY0NlowT1J0dXkxQTJUS05GNVlucWlnQ1J3YkxlblVCUUtrVlNZN1pVNWdnbGlCZWVuS0pVUXJYYmJyQjByOWt3OHNpQmNLUk9laXpPME5XOHk5Z0lpaHI3cVRBajVnVGdrWUpIZ2ZwalNBTWRsSW12OXFGN203bEg1T3VOODg3eWsxT1JfMEg3bldyeWlDM0tiMmJxeXVyMl9pdGc2RVlON3JVOGpVM1RtWXpXU2dqMkNjbk1fZ2owSmxabXJKUVgzZVpCcHNzM1ZQM0JoSUtZb0h6QmhxbTVqVmtNM29YMkhidmtYTHZNNEhvT2hmOVZQUWJWeE5RSHMtZHZWZkJUVlY5ejhsVmMxaFRDdXFDTVlzYnFBalhBRm1ZWkhYV0ZmaVUtNkZKNG55MzVNZmhXbVVkcmVwcXJmWnVRdGluMFdKdlpQNEVpYTgtTklKWkVJX2Q2NmVBRF8yZkN4aFUtUzNfSWFiN3hhOUpGZTZ5U3RlSDFsMnlFYm9kYlVZaXlQVmZiN01POHd5WnFKdThIdg"/><script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          backgroundImage: {
+            'backg': "url('/static/css/bg.jpg')",
+          },
+        },
+      },
+    };
+  </script>
 </head>
 
-<body>
-  <section>
-        <div class="content">
-          <div class="info" id="first-logo">
-            <div class="heading">
-              <h1><span class="movie-night">FaceFinder</span></h1>
-            </div>
-            <button id="first-button" class="btn" data-toggle="collapse" data-target="#second-buttons">START</button>
-          </div>
-          <div id="second-buttons" class="collapse">
-            <form action="/uploadfile/" method="post" enctype="multipart/form-data">
-              <div class="row">
-                <div class="col">
-                  <div class="contentbox">
-                    <div id="box2" class="drop-area js-drop-area dpa">
-                      <div class="drop-content js-drop-content active">
-                        <p class="drop-text">
-                          Drag and Drop to Upload a Photo
-                          <br />
-                          OR
-                        </p>
-                        <label for="file" class="drop-button">Browse File</label>
-                        <input type="file" class="input-file js-input-file" id="file" name="img" accept="image/*" />
-                      </div>
-
-                      <div class="drop-content js-drop-content done">
-                        <img src="{{ url_for('static', path='/green.png') }}" alt="Uploaded"
-                          style="width:300px;height:300px;">
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col">
-                  <div id="box2b" class="drop-area js-drop-area-2">
-                    <div class="drop-content js-drop-content-2 active">
-                      <p class="drop-text">
-                        Drag and Drop to Upload the Folder to Search In
-                        <br />
-                        OR
-                      </p>
-                      <label for="file-2" class="drop-button">Browse Folder</label>
-                      <input type="file" class="input-file js-input-file-2" id="file-2" name="files" webkitdirectory directory
-                        multiple />
-                    </div>
-
-                    <div class="drop-content js-drop-content-2 done-2">
-                      <img src="{{ url_for('static', path='/green.png') }}" alt="Uploaded" style="width:300px;height:300px;">
-                      <button type="submit" value="Upload" class="btn">START PROCESSING</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-    <div id="fourth-buttons" class="collapse">
-      <button class="btn btn-info btn-lg m-2">Button A</button>
-      <button class="btn btn-secondary btn-lg m-2">Button B</button>
-      <button class="btn btn-dark btn-lg m-2">Button C</button>
-      <div class="swiper">
-        <div class="swiper-wrapper">
-
-          <div class="swiper-slide">
-            <span>8.5</span>
-            <h2>Test</h2>
-          </div>
-        </div>
+<body class="bg-gray-100 text-gray-900">
+  <section class="flex flex-col items-center justify-center min-h-screen bg-backg bg-cover bg-center px-4 sm:px-6 lg:px-8">
+    <div class="absolute inset-0 z-10 pointer-events-none">
+      <div class="w-full h-full bg-center bg-cover opacity-70"
+        style="background-image: url('/static/css/bubbles.gif');">
       </div>
     </div>
+    <div class="w-1/2 max-w-4xl bg-white bg-opacity-40 p-6 rounded-lg shadow-lg text-center">
+      <div class="mb-6">
+        <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold text-[#a8415b]">
+          <span class="movie-night">FaceFinder</span>
+        </h1>
+      </div>
+      <button id="first-button" class="px-6 py-3 text-lg sm:text-xl font-bold text-white bg-[#41a88e] rounded-lg hover:bg-[#256756] transition">
+        START
+      </button>
+    </div>
 
+    <div id="second-buttons" class="hidden mt-8 w-full max-w-4xl">
+      <form action="/uploadfile/" method="post" enctype="multipart/form-data" class="space-y-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Upload Photo -->
+          <div id="photo-box" class="flex flex-col items-center justify-center border-2 border-dashed border-[#3f131e] p-6 rounded-lg bg-white bg-opacity-40 relative">
+            <p class="text-gray-900 font-semibold mb-4 text-lg">Upload a Photo</p>
+            <label id="photo-label" for="file" class="px-4 py-2 bg-[#41a88e] text-white rounded cursor-pointer hover:bg-[#256756] transition">
+              Browse File
+            </label>
+            <input type="file" id="file" name="img" accept="image/*" class="hidden" />
+            <div id="file-confirmation" class="hidden absolute inset-0 flex items-center justify-center bg-white bg-opacity-90 rounded-lg text-green-600 text-4xl">
+              <span class="material-icons text-6xl">check_circle</span>
+            </div>
+          </div>
 
-    <ul class="circles">
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-    </ul>
+          <!-- Upload Folder -->
+          <div id="folder-box" class="flex flex-col items-center justify-center border-2 border-dashed border-[#3f131e] p-6 rounded-lg bg-white bg-opacity-40 relative">
+            <p class="text-gray-900 font-semibold mb-4 text-lg">Upload the Folder to Search In</p>
+            <label id="folder-label" for="file-2" class="px-4 py-2 bg-[#41a88e] text-white rounded cursor-pointer hover:bg-[#256756] transition">
+              Browse Folder
+            </label>
+            <input type="file" id="file-2" name="files" webkitdirectory directory multiple class="hidden" />
+            <div id="folder-confirmation" class="hidden absolute inset-0 flex items-center justify-center bg-white bg-opacity-90 rounded-lg text-green-600 text-4xl">
+              <span class="material-icons text-6xl">check_circle</span>
+            </div>
+          </div>
+        </div>
 
+        <div class="text-center">
+          <button type="submit" value="Upload" class="px-6 py-3 bg-[#a8415b] text-white rounded hover:bg-[#41a88e] transition">
+            START PROCESSING
+          </button>
+        </div>
+      </form>
+    </div>
   </section>
 
-
   <script>
-    // Hide the second and third buttons initially
-    $("#second-buttons").hide();
-    $("#third-buttons").hide();
-    //$("#done").hide();
-    //$("#box2b").hide();
-
-    // Add animation to the first button
-    $("#first-button").click(function () {
-      $(this).addClass("animated fadeOut");
-      // Show the second buttons with slide-in animation
-      $("#first-button").hide().addClass("animated slideInLeft");
-      $("#first-logo").hide().addClass("animated slideInLeft");
-      $("#second-buttons").show().addClass("animated slideInLeft");
+    // Display tick mark for file upload and hide upload content
+    document.getElementById("file").addEventListener("change", function () {
+      if (this.files.length > 0) {
+        document.getElementById("photo-label").classList.add("hidden");
+        document.getElementById("photo-box").querySelector("p").classList.add("hidden");
+        document.getElementById("file-confirmation").classList.remove("hidden");
+      }
     });
 
-
-    $("#nextb").click(function () {
-      $(this).addClass("animated fadeOut");
-      // Show the second buttons with slide-in animation
-      $("#box2").hide().addClass("animated slideInLeft");
-      $("#box2b").show().addClass("animated zoomIn");
+    // Display tick mark for folder upload and hide upload content
+    document.getElementById("file-2").addEventListener("change", function () {
+      if (this.files.length > 0) {
+        document.getElementById("folder-label").classList.add("hidden");
+        document.getElementById("folder-box").querySelector("p").classList.add("hidden");
+        document.getElementById("folder-confirmation").classList.remove("hidden");
+      }
     });
 
-
-
-    $("#first-button").click(function () {
-      $(this).addClass("animated fadeOut");
-      // Show the second buttons with slide-in animation
-      $("#first-button").hide().addClass("animated slideInLeft");
-      $("#first-logo").hide().addClass("animated slideInLeft");
-      $("#second-buttons").show().addClass("animated slideInLeft");
-    });
-
-    // Add animation to the second buttons
-    $("#second-buttons button").click(function () {
-      // Hide the second buttons with slide-out animation
-      $("#second-buttons").addClass("animated slideOutRight");
-      // Show the third buttons with zoom-in animation
-      $("#third-buttons").show().addClass("animated zoomIn");
+    // Hide and show logic for buttons
+    document.getElementById("first-button").addEventListener("click", function () {
+      this.classList.add("hidden");
+      document.getElementById("second-buttons").classList.remove("hidden");
     });
   </script>
+
+  <!-- Material Icons for Tick -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </body>
-<script src="{{ url_for('static', path='/j.js') }}"></script>
 
 </html>
